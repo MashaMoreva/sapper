@@ -1,0 +1,171 @@
+/* управление и счетчики */
+
+.header {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+
+.counter,
+.timer {
+    display: flex;
+    width: 78px;
+}
+
+.digit {
+    background: url(../images/sprite.png) no-repeat;
+    background-size: 280px 168px;
+    width: 26px;
+    height: 46px;
+    border-radius: 4px;
+}
+
+.digit-one {
+    background-position: 0 0;
+}
+
+.digit-two {
+    background-position: -28px 0;
+}
+
+.digit-three {
+    background-position: -57px 0;
+}
+
+.digit-four {
+    background-position: -85px 0;
+}
+
+.digit-five {
+    background-position: -113px 0;
+}
+
+.digit-six {
+    background-position: -141px 0;
+}
+
+.digit-seven {
+    background-position: -169px 0;
+}
+
+.digit-eight {
+    background-position: -198px 0;
+}
+
+.digit-nine {
+    background-position: -226px 0;
+}
+
+.digit-zero {
+    background-position: -254px 0;
+}
+
+.emoji {
+    border: none;
+    background: url(../images/sprite.png) no-repeat;
+    background-size: 280px 168px;
+    width: 52px;
+    height: 52px;
+    border-radius: 4px;
+}
+
+.smile {
+    background-position: 0 -48px;
+}
+
+.smile-mousedown {
+    background-position: -55px -48px;
+}
+
+.scare {
+    background-position: -109px -48px;
+}
+
+.winner {
+    background-position: -163px -48px;
+}
+
+.loser {
+    background-position: -218px -48px;
+}
+
+/* игровое поле  */
+
+.field {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 512px;
+}
+
+.cell {
+    border: none;
+    background: url(../images/sprite.png) no-repeat;
+    background-size: 280px 168px;
+    width: 32px;
+    height: 32px;
+    border-radius: 2px;
+}
+
+.default {
+    background-position: 0 -102px;
+}
+
+.open {
+    background-position: -34px -102px;
+}
+
+.flag {
+    background-position: -68px -102px;
+}
+
+.question {
+    background-position: -102px -102px;
+}
+
+.question-mousedown {
+    background-position: -137px -102px;
+}
+
+.bomb {
+    background-position: -171px -102px;
+}
+
+.bomb-loser {
+    background-position: -205px -102px;
+}
+
+.bomb-error {
+    background-position: -240px -102px;
+}
+
+.one {
+    background-position: 0 -136px;
+}
+
+.two {
+    background-position: -34px -136px;
+}
+
+.three {
+    background-position: -69px -136px;
+}
+
+.four {
+    background-position: -103px -136px;
+}
+
+.five {
+    background-position: -137px -136px;
+}
+
+.six {
+    background-position: -171px -136px;
+}
+
+.seven {
+    background-position: -206px -136px;
+}
+
+.eight {
+    background-position: -240px -136px;
+}
