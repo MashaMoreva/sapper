@@ -1,6 +1,9 @@
+import { startTimer } from "./js/timer.js";
 import { convert } from "./js/utils.js";
 
 function startGame(width, height, bombsQuantity) {
+    // startTimer();
+
     const field = document.querySelector('.field');
     const cellsCounter = width * height;
     const cell = document.createElement('button');
@@ -9,14 +12,18 @@ function startGame(width, height, bombsQuantity) {
 
     let closedCellCounter = cellsCounter;
 
-    emoji.addEventListener('mousedown', () =>
-        emoji.classList.toggle('smile-mousedown')
-    )
+    emoji.addEventListener('mousedown', (evt) => {
+        if (evt.button === 0) {
+            emoji.classList.toggle('smile-mousedown')
+        }
+    })
 
-    emoji.addEventListener('mouseup', () =>
-        emoji.classList.toggle('smile-mousedown')
-    )
-
+    emoji.addEventListener('mouseup', (evt) => {
+        if (evt.button === 0) {
+            emoji.classList.toggle('smile-mousedown');
+            window.document.location.reload();
+        }
+    })
 
     for (let i = 0; i < cellsCounter; i++) {
         const cell = document.createElement('button');
@@ -30,32 +37,40 @@ function startGame(width, height, bombsQuantity) {
 
     console.log(bombs)
 
-    // field.addEventListener('contextmenu', (evt) => {
-    //     evt.preventDefault();
-    //     if (evt.target.tagName !== 'BUTTON') {
-    //         return
-    //     }
-    //     evt.target.classList.add('flag');
-    // })
-
-    // field.addEventListener('mousedown', (evt) => {
-    //     if (evt.target.tagName !== 'BUTTON') {
-    //         return
-    //     }
-    //     emoji.classList.toggle('scare');
-    //     evt.target.classList.add('open');
-    // })
-
-    field.addEventListener('click', (evt) => {
+    field.addEventListener('contextmenu', (evt) => {
+        evt.preventDefault();
         if (evt.target.tagName !== 'BUTTON') {
             return
         }
-        // emoji.classList.toggle('scare');
-        const cells = [...field.children];
-        const index = cells.indexOf(evt.target);
-        const column = index % width;
-        const row = Math.floor(index / width);
-        open(row, column);
+        if (evt.button === 2) {
+            evt.target.classList.add('flag');
+            evt.target.disabled = true;
+        }
+
+    })
+
+    field.addEventListener('mousedown', (evt) => {
+        if (evt.target.tagName !== 'BUTTON') {
+            return
+        }
+        if (evt.button === 0) {
+            emoji.classList.toggle('scare');
+            evt.target.classList.add('open');
+        }
+    })
+
+    field.addEventListener('mouseup', (evt) => {
+        if (evt.target.tagName !== 'BUTTON') {
+            return
+        }
+        if (evt.button === 0) {
+            emoji.classList.toggle('scare');
+            const cells = [...field.children];
+            const index = cells.indexOf(evt.target);
+            const column = index % width;
+            const row = Math.floor(index / width);
+            open(row, column);
+        }
     })
 
     function countBombsAround(row, column) {
@@ -125,4 +140,4 @@ function startGame(width, height, bombsQuantity) {
     }
 }
 
-startGame(16, 16, 10)
+startGame(16, 16, 40)
