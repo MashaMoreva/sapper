@@ -36,13 +36,12 @@ function startGame(width, height) {
         .slice(0, bombsQuantity)
 
     field.addEventListener('mousedown', (evt) => {
-        // Если клик был по кнопке и это первый клик, запускаем таймер
         if (evt.target.tagName === 'BUTTON' && isFirstClick) {
             startTimer();
             isFirstClick = false;
         }
 
-        // Если клик был по кнопке левой кнопкой мыши
+
         if (evt.target.tagName === 'BUTTON' && evt.button === 0) {
             emoji.classList.toggle('scare');
             evt.target.classList.add('open');
@@ -57,8 +56,8 @@ function startGame(width, height) {
         if (evt.button === 2) {
             evt.target.classList.add('flag');
             evt.target.disabled = true;
-            flagsPlaced++; // Увеличиваем счетчик флажков
-            updateBombCounter(); // Обновляем счетчик бомб
+            flagsPlaced++;
+            updateBombCounter();
         }
 
     })
@@ -115,14 +114,14 @@ function startGame(width, height) {
         if (closedCellCounter <= bombsQuantity) {
             cell.classList.add(convert(bombsAround))
             emoji.classList.add('winner')
-            stopTimer(); // Останавливаем таймер при победе
+            stopTimer();
             return
         }
 
         if (isBomb(row, column)) {
             cell.classList.add('bomb-loser')
             emoji.classList.add('loser')
-            stopTimer(); // Останавливаем таймер при проигрыше
+            stopTimer();
             return
         } else if (bombsAround !== 0) {
             cell.classList.add(convert(bombsAround))
@@ -150,5 +149,29 @@ function startGame(width, height) {
     }
 }
 
-startGame(16, 16)
+function renderCounterAndTimer() {
+    const counterElement = document.querySelector('.counter');
+    const timerElement = document.querySelector('.timer');
+
+    for (let i = 0; i < 3; i++) {
+        const digitSpan = document.createElement('span');
+        digitSpan.classList.add('digit', `digit-${i}`);
+        if (i === 1) {
+            digitSpan.classList.add('digit-4');
+        } else {
+            digitSpan.classList.add('digit-0');
+        }
+        counterElement.appendChild(digitSpan);
+    }
+
+    for (let i = 0; i < 3; i++) {
+        const digitSpan = document.createElement('span');
+        digitSpan.classList.add('digit', 'digit-0');
+        timerElement.appendChild(digitSpan);
+    }
+}
+
+renderCounterAndTimer();
+startGame(16, 16);
 updateBombCounter();
+
