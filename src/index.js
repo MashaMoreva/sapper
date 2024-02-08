@@ -122,6 +122,11 @@ function startGame(width, height) {
             cell.classList.add('bomb-loser')
             emoji.classList.add('loser')
             stopTimer();
+            cells.forEach((cell, index) => {
+                if (bombs.includes(index)) {
+                    cell.classList.add('bomb');
+                }
+            });
             return
         } else if (bombsAround !== 0) {
             cell.classList.add(convert(bombsAround))
