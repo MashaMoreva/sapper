@@ -178,5 +178,3 @@ function renderCounterAndTimer() {
 
 renderCounterAndTimer();
 startGame(16, 16);
-updateBombCounter();
-
