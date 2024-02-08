@@ -20,43 +20,43 @@
     border-radius: 4px;
 }
 
-.digit-one {
+.digit-1 {
     background-position: 0 0;
 }
 
-.digit-two {
+.digit-2 {
     background-position: -28px 0;
 }
 
-.digit-three {
+.digit-3 {
     background-position: -57px 0;
 }
 
-.digit-four {
+.digit-4 {
     background-position: -85px 0;
 }
 
-.digit-five {
+.digit-5 {
     background-position: -113px 0;
 }
 
-.digit-six {
+.digit-6 {
     background-position: -141px 0;
 }
 
-.digit-seven {
+.digit-7 {
     background-position: -169px 0;
 }
 
-.digit-eight {
+.digit-8 {
     background-position: -198px 0;
 }
 
-.digit-nine {
+.digit-9 {
     background-position: -226px 0;
 }
 
-.digit-zero {
+.digit-0 {
     background-position: -254px 0;
 }
 
