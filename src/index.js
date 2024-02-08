@@ -1,15 +1,15 @@
-import { startTimer } from "./js/timer.js";
+import { startTimer, stopTimer } from "./js/timer.js";
 import { convert } from "./js/utils.js";
 
-function startGame(width, height, bombsQuantity) {
-    // startTimer();
+let isFirstClick = true;
+let flagsPlaced = 0;
+let bombsQuantity = 40;
+
+function startGame(width, height) {
 
     const field = document.querySelector('.field');
     const cellsCounter = width * height;
-    const cell = document.createElement('button');
-    cell.classList.add('cell', 'default');
     const emoji = document.querySelector('.emoji');
-
     let closedCellCounter = cellsCounter;
 
     emoji.addEventListener('mousedown', (evt) => {
@@ -35,7 +35,19 @@ function startGame(width, height, bombsQuantity) {
         .sort(() => Math.random() - 0.5)
         .slice(0, bombsQuantity)
 
-    console.log(bombs)
+    field.addEventListener('mousedown', (evt) => {
+        // Если клик был по кнопке и это первый клик, запускаем таймер
+        if (evt.target.tagName === 'BUTTON' && isFirstClick) {
+            startTimer();
+            isFirstClick = false;
+        }
+
+        // Если клик был по кнопке левой кнопкой мыши
+        if (evt.target.tagName === 'BUTTON' && evt.button === 0) {
+            emoji.classList.toggle('scare');
+            evt.target.classList.add('open');
+        }
+    });
 
     field.addEventListener('contextmenu', (evt) => {
         evt.preventDefault();
@@ -45,18 +57,10 @@ function startGame(width, height, bombsQuantity) {
         if (evt.button === 2) {
             evt.target.classList.add('flag');
             evt.target.disabled = true;
+            flagsPlaced++; // Увеличиваем счетчик флажков
+            updateBombCounter(); // Обновляем счетчик бомб
         }
 
-    })
-
-    field.addEventListener('mousedown', (evt) => {
-        if (evt.target.tagName !== 'BUTTON') {
-            return
-        }
-        if (evt.button === 0) {
-            emoji.classList.toggle('scare');
-            evt.target.classList.add('open');
-        }
     })
 
     field.addEventListener('mouseup', (evt) => {
@@ -65,6 +69,7 @@ function startGame(width, height, bombsQuantity) {
         }
         if (evt.button === 0) {
             emoji.classList.toggle('scare');
+            evt.target.classList.add('open');
             const cells = [...field.children];
             const index = cells.indexOf(evt.target);
             const column = index % width;
@@ -72,6 +77,16 @@ function startGame(width, height, bombsQuantity) {
             open(row, column);
         }
     })
+
+    function updateBombCounter() {
+        const counterElements = document.querySelectorAll('.counter .digit');
+        const remainingBombs = bombsQuantity - flagsPlaced;
+        const remainingBombsStr = remainingBombs.toString().padStart(3, '0');
+        const digits = remainingBombsStr.split('');
+        counterElements.forEach((element, index) => {
+            element.className = `digit digit-${digits[index]}`;
+        });
+    }
 
     function countBombsAround(row, column) {
         let counter = 0;
@@ -100,12 +115,14 @@ function startGame(width, height, bombsQuantity) {
         if (closedCellCounter <= bombsQuantity) {
             cell.classList.add(convert(bombsAround))
             emoji.classList.add('winner')
+            stopTimer(); // Останавливаем таймер при победе
             return
         }
 
         if (isBomb(row, column)) {
             cell.classList.add('bomb-loser')
             emoji.classList.add('loser')
+            stopTimer(); // Останавливаем таймер при проигрыше
             return
         } else if (bombsAround !== 0) {
             cell.classList.add(convert(bombsAround))
@@ -120,10 +137,6 @@ function startGame(width, height, bombsQuantity) {
         }
     }
 
-
-
-    // cell.classList.add(isBomb(row, column) ? 'bomb' : countBombsAround(row, column));
-
     function isBomb(row, column) {
         if (!isValid(row, column)) {
             return false
@@ -133,11 +146,9 @@ function startGame(width, height, bombsQuantity) {
     }
 
     function isValid(row, column) {
-        return row >= 0
-            && row < height
-            && column >= 0
-            && column < width
+        return row >= 0 && row < height && column >= 0 && column < width;
     }
 }
 
-startGame(16, 16, 40)
+startGame(16, 16)
+updateBombCounter();
