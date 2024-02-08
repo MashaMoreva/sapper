@@ -1,26 +1,11 @@
 export function convert(counter) {
-    if (counter === 1) {
-        return 'one'
-    }
-    if (counter === 2) {
-        return 'two'
-    }
-    if (counter === 3) {
-        return 'three'
-    }
-    if (counter === 4) {
-        return 'four'
-    }
-    if (counter === 5) {
-        return 'five'
-    }
-    if (counter === 6) {
-        return 'six'
-    }
-    if (counter === 7) {
-        return 'seven'
-    }
-    if (counter === 8) {
-        return 'eight'
+    // Массив с названиями классов спрайтов
+    const spriteClasses = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+
+    // Проверяем, что значение счетчика находится в диапазоне от 0 до 8
+    if (counter >= 0 && counter <= 8) {
+        return spriteClasses[counter]; // Возвращаем соответствующий класс спрайта
+    } else {
+        return ''; // Если значение счетчика некорректно, возвращаем пустую строку
     }
 }
