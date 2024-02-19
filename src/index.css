@@ -1,8 +1,14 @@
-.page {
-    background-image: url(../images/bg.jpg);
+body {
+    background-image: url(../images/bg.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
-    margin: 3% auto 0;
+    margin: 0;
+    padding: 50px 0;
+}
+
+.page {
+    backdrop-filter: blur(10px);
+    height: 100vh;
     max-width: 1920px;
     min-width: 720px;
 }
