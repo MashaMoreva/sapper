@@ -1,0 +1,220 @@
+body {
+  background-image: url(./assets/images/bg.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 50px 0;
+}
+
+.page {
+  backdrop-filter: blur(10px);
+  height: 100vh;
+  max-width: 1920px;
+  min-width: 720px;
+}
+
+.wrapper,
+.header {
+  background: #bdbdbd;
+  display: flex;
+}
+
+.wrapper {
+  border-color: #fff #7b7b7b #7b7b7b #fff;
+  border-radius: 2px;
+  border-style: solid;
+  border-width: 4px;
+  flex-direction: column;
+  height: 684px;
+  justify-content: center;
+  margin: auto;
+  width: 594px;
+}
+
+.header {
+  border-color: #7b7b7b #fff #fff #7b7b7b;
+  border-radius: 2px;
+  border-style: solid;
+  border-width: 4px;
+  height: 70px;
+  margin: 0 auto;
+  padding: 0 14px;
+  width: 532px;
+}
+
+.counter,
+.timer {
+  display: flex;
+  width: 84px;
+  height: 50px;
+  margin: auto 0;
+}
+
+.divider {
+  height: 13px;
+}
+
+.digit {
+  background: url(./assets/images/sprite.png) no-repeat;
+  background-size: 280px 168px;
+  width: 26px;
+  height: 46px;
+  border-radius: 4px;
+}
+
+.digit-1 {
+  background-position: 0 0;
+}
+
+.digit-2 {
+  background-position: -28px 0;
+}
+
+.digit-3 {
+  background-position: -57px 0;
+}
+
+.digit-4 {
+  background-position: -85px 0;
+}
+
+.digit-5 {
+  background-position: -113px 0;
+}
+
+.digit-6 {
+  background-position: -141px 0;
+}
+
+.digit-7 {
+  background-position: -169px 0;
+}
+
+.digit-8 {
+  background-position: -198px 0;
+}
+
+.digit-9 {
+  background-position: -226px 0;
+}
+
+.digit-0 {
+  background-position: -254px 0;
+}
+
+.emoji {
+  border: none;
+  background: url(./assets/images/sprite.png) no-repeat;
+  background-size: 280px 168px;
+  width: 52px;
+  height: 52px;
+  border-radius: 4px;
+  margin: 9px auto;
+}
+
+.smile {
+  background-position: 0 -48px;
+}
+
+.smile-mousedown {
+  background-position: -55px -48px;
+}
+
+.scare {
+  background-position: -109px -48px;
+}
+
+.winner {
+  background-position: -163px -48px;
+}
+
+.loser {
+  background-position: -218px -48px;
+}
+
+/* игровое поле  */
+
+.field {
+  border-color: #7b7b7b #fff #fff #7b7b7b;
+  border-radius: 2px;
+  border-style: solid;
+  border-width: 4px;
+  display: grid;
+  grid-template-columns: repeat(16, 35px);
+  height: 560px;
+  margin: 0 auto;
+  width: 560px;
+}
+
+.cell {
+  border: none;
+  background: url(./assets/images/sprite.png) no-repeat;
+  background-size: 280px 168px;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+}
+
+.default {
+  background-position: 0 -102px;
+}
+
+.open {
+  background-position: -34px -102px;
+}
+
+.flag {
+  background-position: -68px -102px;
+}
+
+.question {
+  background-position: -102px -102px;
+}
+
+.question-mousedown {
+  background-position: -137px -102px;
+}
+
+.bomb {
+  background-position: -171px -102px;
+}
+
+.bomb-loser {
+  background-position: -205px -102px;
+}
+
+.bomb-error {
+  background-position: -240px -102px;
+}
+
+.one {
+  background-position: 0 -136px;
+}
+
+.two {
+  background-position: -34px -136px;
+}
+
+.three {
+  background-position: -69px -136px;
+}
+
+.four {
+  background-position: -103px -136px;
+}
+
+.five {
+  background-position: -137px -136px;
+}
+
+.six {
+  background-position: -171px -136px;
+}
+
+.seven {
+  background-position: -206px -136px;
+}
+
+.eight {
+  background-position: -240px -136px;
+}
