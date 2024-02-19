@@ -1,15 +1,16 @@
-import { startTimer, stopTimer } from "./js/timer.js";
-import { convert } from "./js/utils.js";
+import { startTimer, stopTimer } from "./timer";
+import { convert } from "./utils";
+import "./index.scss";
 
-let isFirstClick = true;
-let flagsPlaced = 0;
-let bombsQuantity = 40;
+let isFirstClick: boolean = true;
+let flagsPlaced: number = 0;
+let bombsQuantity: number = 40;
 
-function startGame(width, height) {
-  const field = document.querySelector(".field");
-  const cellsCounter = width * height;
-  const emoji = document.querySelector(".emoji");
-  let closedCellCounter = cellsCounter;
+function startGame(width: number, height: number): void {
+  const field: HTMLElement = document.querySelector(".field")!;
+  const cellsCounter: number = width * height;
+  const emoji: HTMLElement = document.querySelector(".emoji")!;
+  let closedCellCounter: number = cellsCounter;
 
   emoji.addEventListener("mousedown", (evt) => {
     if (evt.button === 0) {
@@ -30,44 +31,47 @@ function startGame(width, height) {
     field.append(cell);
   }
 
-  const bombs = [...Array(cellsCounter).keys()]
+  const bombs: number[] = [...Array(cellsCounter).keys()]
     .sort(() => Math.random() - 0.5)
     .slice(0, bombsQuantity);
 
   field.addEventListener("mousedown", (evt) => {
-    if (evt.target.tagName === "BUTTON" && isFirstClick) {
+    const target = evt.target as HTMLElement;
+    if (target.tagName === "BUTTON" && isFirstClick) {
       startTimer();
       isFirstClick = false;
     }
 
-    if (evt.target.tagName === "BUTTON" && evt.button === 0) {
+    if (target.tagName === "BUTTON" && evt.button === 0) {
       emoji.classList.toggle("scare");
-      evt.target.classList.add("open");
+      target.classList.add("open");
     }
   });
 
   field.addEventListener("contextmenu", (evt) => {
     evt.preventDefault();
-    if (evt.target.tagName !== "BUTTON") {
+    const target = evt.target as HTMLButtonElement;
+    if (target.tagName !== "BUTTON") {
       return;
     }
     if (evt.button === 2) {
-      evt.target.classList.add("flag");
-      evt.target.disabled = true;
+      target.classList.add("flag");
+      target.disabled = true;
       flagsPlaced++;
       updateBombCounter();
     }
   });
 
   field.addEventListener("mouseup", (evt) => {
-    if (evt.target.tagName !== "BUTTON") {
+    const target = evt.target as HTMLElement;
+    if (target.tagName !== "BUTTON") {
       return;
     }
     if (evt.button === 0) {
       emoji.classList.toggle("scare");
-      evt.target.classList.add("open");
+      target.classList.add("open");
       const cells = [...field.children];
-      const index = cells.indexOf(evt.target);
+      const index = cells.indexOf(target);
       const column = index % width;
       const row = Math.floor(index / width);
       open(row, column);
@@ -84,7 +88,7 @@ function startGame(width, height) {
     });
   }
 
-  function countBombsAround(row, column) {
+  function countBombsAround(row: number, column: number): number {
     let counter = 0;
     for (let x = -1; x <= 1; x++) {
       for (let y = -1; y <= 1; y++) {
@@ -96,11 +100,13 @@ function startGame(width, height) {
     return counter;
   }
 
-  function open(row, column) {
+  function open(row: number, column: number): void {
     if (!isValid(row, column)) return;
 
     const index = row * width + column;
-    const cells = [...field.children];
+    const cells: HTMLButtonElement[] = [
+      ...field.children,
+    ] as HTMLButtonElement[];
     const cell = cells[index];
     const bombsAround = countBombsAround(row, column);
 
@@ -143,7 +149,7 @@ function startGame(width, height) {
     }
   }
 
-  function isBomb(row, column) {
+  function isBomb(row: number, column: number): boolean {
     if (!isValid(row, column)) {
       return false;
     }
@@ -151,14 +157,14 @@ function startGame(width, height) {
     return bombs.includes(index);
   }
 
-  function isValid(row, column) {
+  function isValid(row: number, column: number): boolean {
     return row >= 0 && row < height && column >= 0 && column < width;
   }
 }
 
-function renderCounterAndTimer() {
-  const counterElement = document.querySelector(".counter");
-  const timerElement = document.querySelector(".timer");
+function renderCounterAndTimer(): void {
+  const counterElement: HTMLElement = document.querySelector(".counter")!;
+  const timerElement: HTMLElement = document.querySelector(".timer")!;
 
   for (let i = 0; i < 3; i++) {
     const digitSpan = document.createElement("span");
