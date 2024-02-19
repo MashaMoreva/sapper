@@ -9,6 +9,7 @@ body {
 .page {
   backdrop-filter: blur(10px);
   height: 100vh;
+  width: 100vw;
   max-width: 1920px;
   min-width: 720px;
 }
